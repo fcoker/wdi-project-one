@@ -1,0 +1,18 @@
+.gameBoard{
+  height: 620px;
+  width: 610px;
+  display: flex;
+  flex-wrap: wrap;
+  border: solid;
+  position: absolute;
+
+}
+
+.gameBoard div{
+  border: solid;
+  height: 50px;
+  width: 50px;
+  padding-right: 5px;
+  padding-bottom: 6px;
+  position: relative;
+}
