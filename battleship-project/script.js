@@ -87,10 +87,14 @@ function fire(){
   // console.log('clicked ' +'currentRow :' + currentRow + ' current column :' + currentColumn + ' currentRowColumn is :' + currentRowColumn);
 
   //PREDICAMENTS
-  //How do I save the '1's' as the actual 5 ships?
-  //how do I know when a ship has been fully destroyed?
-  //How can i get the computer to randomnly position his ships on the board at the start of the game?
+  //a.)how do I know when all 1's in a row or column have been changed to 2(meaning a destroyed ship)?
+  //b.)How do I save the '1's' on DomGameBoard as the actual five ships?
+  //--if any line(either vertical or horizontal) of 1's are wedged between two 0's, it is a ship.
+  //--the number of 1's wedged inbetween the two 0's determines what type of ship it is.
+  //c.)How can i get the computer to randomnly position his ships on the board at the start of the game?
 }
+
+
 
 // COMPUTER'S MOVE AGAINST PLAYER!!
 
@@ -108,9 +112,33 @@ const DomGameBoard = [
   [0,0,0,0,0,0,0,0,0,0]
 ];
 
-//total number of hits in any given game is 17. so if any player gets hit 17 times then game is over.
-// Carrier     - 5 hits
-// Battleship  - 4 hits
-// Destroyer   - 3 hits
-// Submarine   - 3 hits
-// Patrol Boat - 2 hits
+//Thought Process
+//b.)How do I save the '1's' on DomGameBoard as the actual five types ships?
+//--if any line(either vertical or horizontal) of more than two 1's in a row are wedged between two 0's, it is a ship.
+//---->detect 1's horizontally by checking through each array for 1's wedged btw 0's and counting them
+//---->if 1"s nested between 0's is greater than 2 then return the 1's
+//---->1 is true, 0 is false therefore could check if each condition in array[index] is true or false.
+//---->how can i use .filter() to check for ("1's" in a row > than two) and that are wedged btw 0 ([0,1,1,1,1,0])
+
+// DomGameBoard.filter();
+// const detectIfShip = [];
+// const isShip = [];
+//
+// for (let i = 0; i < DomGameBoard.length; i ++){
+//   for(let j = 0; j < DomGameBoard[i].length; j++){
+//
+//   }
+// }
+// if (DomGameBoard[i][index -1] === 0 && DomGameBoard[i][index +1 === 0]){
+//   detectIfShip.push(index);
+// }
+// if(DomGameBoard[i].length > 2){
+//   isShip.push(DomGameBoard);
+// }
+//total number of boxes per ship/total hits for ship to be destroyed. Total number of hits per player in any
+//given game is 17. So if any player gets hit 17 times then game is over.
+// Carrier     - 5 boxes/hits
+// Battleship  - 4 boxes/hits
+// Destroyer   - 3 boxes/hits
+// Submarine   - 3 boxes/hits
+// Patrol Boat - 2 boxes/hits
