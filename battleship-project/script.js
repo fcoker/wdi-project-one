@@ -1,8 +1,8 @@
 
 //set the rows and colums
-
 const columns = 10;
 const rows = 10;
+let numberOfHits = 0;
 
 //storing the main div containing the boardgame in a variable.
 const gameBoardContainer = document.getElementById('gameBoardDiv');
@@ -21,19 +21,19 @@ for(let i=0; i < columns; i++){
   }
 }
 
-
+//PLAYER'S MOVE AGAINST COMPUTER!!
 
 //set event listeners for all boxes.
 gameBoardContainer.addEventListener('click', fire);
 
-
+//CALLBACK FIRE FUNCTION!!
 function fire(){
   const currentClick = event.target.id;
   const currentRow = currentClick.substring(1, 2);
   const currentColumn =currentClick.substring(2,3);
   const currentRowNumber = parseFloat(currentRow);
   const currentColumnNumber = parseFloat(currentColumn);
-  const currentRowColumn = currentClick.substring(1, 3);
+  // const currentRowColumn = currentClick.substring(1, 3);
   const currentGameBox = event.target;
   // console.log(currentColumn);
 
@@ -54,11 +54,23 @@ function fire(){
 
   //HIT FUNCTION!!
   //hit function changes specific box to 2 if hit. it should also change the shade of color to red
+  // console.log(numberOfHits);
   function hit(){
-    // for the user to know which square has been hit the box should be reded out once click and hitt
+    // for the user to know which square has been hit the box should be reded out once click and hit
     currentGameBox.style.background = 'red';
+    numberOfHits ++;
+
+    if(numberOfHits === 17){
+      win();
+    }
+    // console.log(numberOfHits);
     //for me as the developer to know which square has been hit
     return DomGameBoard[currentRowNumber][currentColumnNumber] = 2;
+  }
+
+  // WIN FUNCTION
+  function win(){
+    return console.log('you have sunk all of computers battleships, you win!');
   }
 
   //Miss!!
@@ -70,12 +82,18 @@ function fire(){
   } else if(DomGameBoard[currentRowNumber][currentColumnNumber] === 1){
     hit();
   }
+  // console.log(currentClick);
+  //
+  // console.log('clicked ' +'currentRow :' + currentRow + ' current column :' + currentColumn + ' currentRowColumn is :' + currentRowColumn);
 
-
-  console.log(currentClick);
-
-  console.log('clicked ' +'currentRow :' + currentRow + ' current column :' + currentColumn + ' currentRowColumn is :' + currentRowColumn);
+  //PREDICAMENTS
+  //How do I save the '1's' as the actual 5 ships?
+  //how do I know when a ship has been fully destroyed?
+  //How can i get the computer to randomnly position his ships on the board at the start of the game?
 }
+
+// COMPUTER'S MOVE AGAINST PLAYER!!
+
 
 const DomGameBoard = [
   [0,0,0,0,0,0,0,0,0,0],
@@ -96,4 +114,3 @@ const DomGameBoard = [
 // Destroyer   - 3 hits
 // Submarine   - 3 hits
 // Patrol Boat - 2 hits
-let numberOfHits = 0;
