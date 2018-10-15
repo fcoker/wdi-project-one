@@ -1,5 +1,20 @@
 //PREDICAMENTS
+//MVP!!!
+//----->compDomGameBoard keeps coming up as undefined. When i console.log it on a global scope it works
+//      but within the computerFire function it doesnt work.(userDomGameBoard works perfect in
+//      function scope but only when all of 'COMPUTER AGAINST PLAYER' is commented out).
+//----->how do i get user to play again once he has a hit and to move to computer's turn when he/she misses.
+//----->how do i get computer to take a turn right after user clicks and misses
+//----->how to get computer to play again if it gets a hit and stop if it misses.
 //----->How can i get the computer to randomnly position his/her ships on the board at the start of the game?
+//----->When game is won how do i end game and restart.
+// FINISHED GAME
+//----->Give computer if condition that once a hit is made, its next hit is a 1/4,
+//      if hit again 1/1 till ship destroyed.
+//----->allow computer randmonly place all ships on board at the start of the game.
+//----->animations for hit and miss functions that explode on ship or drop into the water
+//----->sound for FIRE functions
+//----->ingame display box with animated captain head showing relevant messages and alerts
 
 //set the rows and colums
 const columns = 10;
