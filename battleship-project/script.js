@@ -1,6 +1,5 @@
 //PREDICAMENTS
-//----->ask for help on toggle so that boxes can only be clicked Once
-//----->make my destroyed ship message show only once.(i feel toggle is involved)
+//
 //----->How can i get the computer to randomnly position his/her ships on the board at the start of the game?
 
 //set the rows and colums
@@ -33,11 +32,11 @@ const DomIndividualBoxes = document.querySelectorAll('.individualBoxes');
 
 //PLAYER'S MOVE AGAINST COMPUTER!!
 //Type of ships arrays, once portion of ship is damaged it is pushed into its respective array
-const carrier = [];
-const patrolBoat = [];
-const battleShip = [];
-const submarine = [];
-const destroyer = [];
+let carrier = [];
+let patrolBoat = [];
+let battleShip = [];
+let submarine = [];
+let destroyer = [];
 
 //Event listeners for all boxes.
 DomIndividualBoxes.forEach(box =>{
@@ -104,14 +103,19 @@ function fire(){
     //Determine when ship has been destroyed
     if(carrier.length === 5){
       console.log('You have destroyed computer\'s Aircraft Carrier!!');
+      return carrier = [];
     } else if (patrolBoat.length === 2) {
       console.log('You have destroyed computer\'s Patrol Boat!!');
+      return patrolBoat = [];
     } else if(battleShip.length === 4){
       console.log('You have destroyed computer\'s Battle Ship!!');
+      return battleShip = [];
     } else if (submarine.length === 3) {
       console.log('You have destroyed computer\'s Submarine!!');
+      return submarine = [];
     } else if (destroyer.length === 3){
       console.log('You have destroyed computer\'s Destroyer!!');
+      return destroyer = [];
     }
     //Win!!
     if(numberOfHits === 17){
@@ -135,7 +139,7 @@ function fire(){
     hit();
   }
   // console.log('clicked ' +'currentRow :' + currentRow + ' current column :' + currentColumn);
-  
+
   //Remove event listener from each box clicked once they have been clicked.
   currentGameBox.removeEventListener('click', fire);
 
