@@ -1,7 +1,7 @@
 //PREDICAMENTS
-//----->How can i get the computer to randomnly position his/her ships on the board at the start of the game?
 //----->ask for help on toggle so that boxes can only be clicked Once
 //----->make my destroyed ship message show only once.(i feel toggle is involved)
+//----->How can i get the computer to randomnly position his/her ships on the board at the start of the game?
 
 //set the rows and colums
 const columns = 10;
@@ -12,6 +12,7 @@ let numberOfHits = 0;
 const gameBoardContainer = document.getElementById('gameBoardDiv');
 // console.log(gameBoard);
 
+
 //Generating boxes in the grid by adding extra divs to my gameBoard using a loop within a
 //loop to create and id the extra divs in rows and columns
 for(let i=0; i < columns; i++){
@@ -21,9 +22,14 @@ for(let i=0; i < columns; i++){
 
     //add individual id's to each box right after they've been made.
     box.id = 'B' + i  + j;
+    //add the same class to all clickable boxes
+    box.className = 'individualBoxes';
 
   }
 }
+//storing individual game boxes in a variable
+const DomIndividualBoxes = document.querySelectorAll('.individualBoxes');
+// console.log(DomIndividualBoxes);
 
 //PLAYER'S MOVE AGAINST COMPUTER!!
 //Type of ships arrays, once portion of ship is damaged it is pushed into its respective array
@@ -34,7 +40,9 @@ const submarine = [];
 const destroyer = [];
 
 //Event listeners for all boxes.
-gameBoardContainer.addEventListener('click', fire);
+DomIndividualBoxes.forEach(box =>{
+  box.addEventListener('click', fire);
+});
 
 //CALLBACK FIRE FUNCTION!!
 function fire(){
@@ -127,9 +135,12 @@ function fire(){
     hit();
   }
   // console.log('clicked ' +'currentRow :' + currentRow + ' current column :' + currentColumn);
+  
+  //Remove event listener from each box clicked once they have been clicked.
+  currentGameBox.removeEventListener('click', fire);
+
 
 }
-
 
 // COMPUTER'S MOVE AGAINST PLAYER!!
 
@@ -152,26 +163,14 @@ const DomGameBoard = [
   [0,0,0,6,6,6,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0]
 ];
-
-//DETERMINING SHIPS!!(possible solution)
-//-->push what type of ship box has been hit to its corresponding type of ship array.
-//-->if ship type array has been filled then said ship has been destroyed.
-
-// for(let i = 0; i < DomGameBoard.length; i ++){
-//   for(let j = 0; j < DomGameBoard[i].length; j++){
-//     r
-//     } else if(DomGameBoard[i][j] === 8){
-//       patrolBoat.push(DomGameBoard[i][j]);
-//       // return patrolBoat;
-//     } else if(DomGameBoard[i][j] === 10){
-//       battleShip.push(DomGameBoard[i][j]);
-//       // return battleShip;
-//     } else if(DomGameBoard[i][j] === 12){
-//       submarine.push(DomGameBoard[i][j]);
-//       // return submarine;
-//     } else if(DomGameBoard[i][j] === 14){
-//       destroyer.push(DomGameBoard[i][j]);
-//       // return destroyer;
-//     }
-//   }
+// function generateComputerShipPlacement(){
+//   const randomnRow = Math.floor(Math.random()*10);
+//   const randomnColumn = Math.floor(Math.random()*10);
 // }
+// generateComputerShipPlacement();
+
+//-->how do i randomnly generate each individual ship type/number to be aligned in correct order
+//   randomnly either vertically or horizontally anywhere on the board.
+
+//-->DomGameBoard[randomnRow] or [randomnColumn]
+//-->DomGameBoard[randomnRow or randomnColumn] shipNumber
