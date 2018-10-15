@@ -1,11 +1,17 @@
+.mainContainer{
+  display: inline-block;
+  display: flex;
+  width: 1400px;
+  height: 1400px;
+}
+
 .gameBoard{
   height: 620px;
   width: 610px;
   display: flex;
   flex-wrap: wrap;
   border: solid;
-  position: absolute;
-
+  margin-right: 5vh;
 }
 
 .gameBoard div{
@@ -14,5 +20,21 @@
   width: 50px;
   padding-right: 5px;
   padding-bottom: 6px;
-  position: relative;
+  /* position: relative; */
+}
+.computerGameBoard{
+  height: 620px;
+  width: 610px;
+  border: solid;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.computerGameBoard div{
+  border: solid;
+  height: 50px;
+  width: 50px;
+  padding-right: 5px;
+  padding-bottom: 6px;
+  /* position: relative; */
 }

@@ -7,8 +7,11 @@ const columns = 10;
 const rows = 10;
 let numberOfHits = 0;
 
-//storing the main div containing the boardgame in a variable.
+//storing the main div containing the user grid in a variable.
 const gameBoardContainer = document.getElementById('gameBoardDiv');
+//storing the main div containing the computer grid in a variable.
+const computerBoardContainer = document.getElementById('computerGameBoardDiv');
+
 // console.log(gameBoard);
 
 
@@ -21,6 +24,19 @@ for(let i=0; i < columns; i++){
 
     //add individual id's to each box right after they've been made.
     box.id = 'B' + i  + j;
+    //add the same class to all clickable boxes
+    box.className = 'individualBoxes';
+
+  }
+}
+
+for(let i=0; i < columns; i++){
+  for(let j=0; j< rows; j++){
+    const box = document.createElement('div');
+    computerBoardContainer.appendChild(box);
+
+    //add individual id's to each box right after they've been made.
+    box.id = 'C' + i  + j;
     //add the same class to all clickable boxes
     box.className = 'individualBoxes';
 
