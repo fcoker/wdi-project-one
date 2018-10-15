@@ -1,8 +1,15 @@
+body{
+  background-image: url('battleship img/battleship background/map-2153535_1280.jpg');
+  background-image: wrap;
+}
 .mainContainer{
   display: inline-block;
   display: flex;
   width: 1400px;
   height: 1400px;
+  justify-content: center;
+  opacity: 0.8;
+  margin-top: 17vh;
 }
 
 .gameBoard{
@@ -12,6 +19,7 @@
   flex-wrap: wrap;
   border: solid;
   margin-right: 5vh;
+  background-image: url('battleship img/water-1330252_1280.jpg');
 }
 
 .gameBoard div{
@@ -20,6 +28,7 @@
   width: 50px;
   padding-right: 5px;
   padding-bottom: 6px;
+  opacity: 0.6;
   /* position: relative; */
 }
 .computerGameBoard{
@@ -28,6 +37,7 @@
   border: solid;
   display: flex;
   flex-wrap: wrap;
+  background-image: url('battleship img/water-1330252_1280.jpg');
 
 }
 .computerGameBoard div{
@@ -36,5 +46,6 @@
   width: 50px;
   padding-right: 5px;
   padding-bottom: 6px;
+  opacity: 0.6;
   /* position: relative; */
 }

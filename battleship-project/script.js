@@ -1,11 +1,11 @@
 //PREDICAMENTS
-//
 //----->How can i get the computer to randomnly position his/her ships on the board at the start of the game?
 
 //set the rows and colums
 const columns = 10;
 const rows = 10;
-let numberOfHits = 0;
+let userNumberOfHits = 0;
+// let compNumberOfHits = 0;
 
 //storing the main div containing the user grid in a variable.
 const gameBoardContainer = document.getElementById('gameBoardDiv');
@@ -14,7 +14,7 @@ const computerBoardContainer = document.getElementById('computerGameBoardDiv');
 
 // console.log(gameBoard);
 
-
+//CREATING USERS GRID!!
 //Generating boxes in the grid by adding extra divs to my gameBoard using a loop within a
 //loop to create and id the extra divs in rows and columns
 for(let i=0; i < columns; i++){
@@ -25,11 +25,10 @@ for(let i=0; i < columns; i++){
     //add individual id's to each box right after they've been made.
     box.id = 'B' + i  + j;
     //add the same class to all clickable boxes
-    box.className = 'individualBoxes';
-
+    box.className = 'userIndividualBoxes';
   }
 }
-
+//CREATING COMPUTERS GRID!!
 for(let i=0; i < columns; i++){
   for(let j=0; j< rows; j++){
     const box = document.createElement('div');
@@ -38,13 +37,13 @@ for(let i=0; i < columns; i++){
     //add individual id's to each box right after they've been made.
     box.id = 'C' + i  + j;
     //add the same class to all clickable boxes
-    box.className = 'individualBoxes';
+    box.className = 'compIndividualBoxes';
 
   }
 }
 //storing individual game boxes in a variable
-const DomIndividualBoxes = document.querySelectorAll('.individualBoxes');
-// console.log(DomIndividualBoxes);
+const UserIndividualGameBoxes = document.querySelectorAll('.userIndividualBoxes');
+// console.log(UserIndividualGameBoxes);
 
 //PLAYER'S MOVE AGAINST COMPUTER!!
 //Type of ships arrays, once portion of ship is damaged it is pushed into its respective array
@@ -55,12 +54,12 @@ let submarine = [];
 let destroyer = [];
 
 //Event listeners for all boxes.
-DomIndividualBoxes.forEach(box =>{
-  box.addEventListener('click', fire);
+UserIndividualGameBoxes.forEach(box =>{
+  box.addEventListener('click', userFire);
 });
 
-//CALLBACK FIRE FUNCTION!!
-function fire(){
+//CALLBACK User FIRE FUNCTION!!
+function userFire(){
   const currentClick = event.target.id;
   const currentRow = currentClick.substring(1, 2);
   const currentColumn = currentClick.substring(2,3);
@@ -86,17 +85,17 @@ function fire(){
     currentGameBox.style.background = 'grey';
     console.log('your torpedo missed!!');
     //for me as the developer to know which square has been missed
-    return DomGameBoard[currentRowNumber][currentColumnNumber] = 3;
+    return userDomGameBoard[currentRowNumber][currentColumnNumber] = 3;
   }
 
   //HIT FUNCTION!!
   //hit function changes specific box to shipNumber * 2 if hit, it should also change the shade of color to red
-  // console.log(numberOfHits);
+  // console.log(userNumberOfHits);
   function hit(){
     // for the user to know which square has been hit the box should be reded out once click and hit
     currentGameBox.style.background = 'red';
     console.log('you have hit computers ship');
-    numberOfHits ++;
+    userNumberOfHits ++;
     //Determine type of ship hit and push the portion of the ship hit to their respective ship array.
     //SHIP KEYS and Ship Keys once Hit(Ship number multiplied by 2)!
     //1 -->Carrier----------------------->Once Hit changes to 2
@@ -104,17 +103,17 @@ function fire(){
     //5 -->Battle Ship------------------->Once Hit changes to 10
     //6 -->Submarine--------------------->Once Hit changes to 12
     //7 -->Destroyer--------------------->Once Hit changes to 14
-    const typeOfShipHit = DomGameBoard[currentRowNumber][currentColumnNumber] * 2;
-    if(typeOfShipHit === 2){
-      carrier.push(typeOfShipHit);
-    } else if (typeOfShipHit === 8) {
-      patrolBoat.push(typeOfShipHit);
-    } else if (typeOfShipHit === 10) {
-      battleShip.push(typeOfShipHit);
-    } else if (typeOfShipHit === 12) {
-      submarine.push(typeOfShipHit);
-    } else if(typeOfShipHit === 14){
-      destroyer.push(typeOfShipHit);
+    const compTypeOfShipHit= userDomGameBoard[currentRowNumber][currentColumnNumber] * 2;
+    if(compTypeOfShipHit === 2){
+      carrier.push(compTypeOfShipHit);
+    } else if (compTypeOfShipHit === 8) {
+      patrolBoat.push(compTypeOfShipHit);
+    } else if (compTypeOfShipHit === 10) {
+      battleShip.push(compTypeOfShipHit);
+    } else if (compTypeOfShipHit === 12) {
+      submarine.push(compTypeOfShipHit);
+    } else if(compTypeOfShipHit === 14){
+      destroyer.push(compTypeOfShipHit);
     }
     //Determine when ship has been destroyed
     if(carrier.length === 5){
@@ -134,36 +133,110 @@ function fire(){
       return destroyer = [];
     }
     //Win!!
-    if(numberOfHits === 17){
-      win();
+    if(userNumberOfHits === 17){
+      userWin();
     }
-    // console.log(numberOfHits);
+    // console.log(userNumberOfHits);
   }
 
   // WIN FUNCTION
-  function win(){
+  function userWin(){
     return console.log('you have sunk all of computers ships, you win!');
   }
 
   //HIT AND MISS CONDITION!!
   //If miss, Miss function is invoked
-  if(!DomGameBoard[currentRowNumber][currentColumnNumber]){
+  if(!userDomGameBoard[currentRowNumber][currentColumnNumber]){
     miss();
     //Hit!!
     //If hit, hit function is invoked
-  } else if(DomGameBoard[currentRowNumber][currentColumnNumber]){
+  } else if(userDomGameBoard[currentRowNumber][currentColumnNumber]){
     hit();
   }
   // console.log('clicked ' +'currentRow :' + currentRow + ' current column :' + currentColumn);
 
   //Remove event listener from each box clicked once they have been clicked.
-  currentGameBox.removeEventListener('click', fire);
-
-
+  currentGameBox.removeEventListener('click', userFire);
 }
 
 // COMPUTER'S MOVE AGAINST PLAYER!!
-
+// let compCarrier = [];
+// let compPatrolBoat = [];
+// let compBattleShip = [];
+// let compSubmarine = [];
+// let compDestroyer = [];
+//
+// //computer fire function!!
+// function computerFire(){
+//   const randomnRow = Math.floor(Math.random()*10);
+//   const randomnColumn = Math.floor(Math.random()*10);
+//   // (compDomGameBoard)keeps coming up as undefined even though it is defined globally!!
+//   // let currentDomCompChoice = compDomGameBoard[randomnRow][randomnColumn];
+//   const compCurrentGameBoxID = 'C' + randomnRow + randomnColumn;
+//   const compCurrentGameBox = document.getElementById(compCurrentGameBoxID);
+//   // console.log(compDomGameBoard[randomnRow][randomnColumn]);
+//
+//   function compMiss(){
+//     compCurrentGameBox.style.background = 'grey';
+//     console.log('Computer\'s torpedo missed you!!');
+//     return compDomGameBoard[randomnRow][randomnColumn] = 3;
+//   }
+//
+//   function compWin(){
+//     return console.log('Computer has sunk all your ships, you Loose!!');
+//   }
+//
+//   function compHit(){
+//     compCurrentGameBox.style.background = 'red';
+//     console.log('Computer has hit your ship!!');
+//     compNumberOfHits ++;
+//     //Determine type of ship hit and push the portion of the ship hit to their respective ship array.
+//     const userTypeOfShipHit = compDomGameBoard[randomnRow][randomnColumn] * 2;
+//     if(userTypeOfShipHit === 2){
+//       compCarrier.push(userTypeOfShipHit);
+//     } else if (userTypeOfShipHit === 8) {
+//       compPatrolBoat.push(userTypeOfShipHit);
+//     } else if (userTypeOfShipHit === 10) {
+//       compBattleShip.push(userTypeOfShipHit);
+//     } else if (userTypeOfShipHit === 12) {
+//       compSubmarine.push(userTypeOfShipHit);
+//     } else if(userTypeOfShipHit === 14){
+//       compDestroyer.push(userTypeOfShipHit);
+//     }
+//
+//     //Determine when ship has been destroyed
+//     if(compCarrier.length === 5){
+//       console.log('Computer has destroyed your Aircraft Carrier!!');
+//       return compCarrier = [];
+//     } else if (compPatrolBoat.length === 2) {
+//       console.log('Computer has destroyed your Patrol Boat!!');
+//       return compPatrolBoat = [];
+//     } else if(compBattleShip.length === 4){
+//       console.log('Computer has destroyed your Battle Ship!!');
+//       return compBattleShip = [];
+//     } else if (compSubmarine.length === 3) {
+//       console.log('Computer has destroyed your Submarine!!');
+//       return compSubmarine = [];
+//     } else if (compDestroyer.length === 3){
+//       console.log('Computer has destroyed your Destroyer!!');
+//       return compDestroyer = [];
+//     }
+//     if(compNumberOfHits === 17){
+//       compWin();
+//     }
+//   }
+//
+//   //HIT AND MISS CONDITION FOR COMPUTER!!
+//   //If miss, Miss function is invoked
+//   if(!compDomGameBoard[randomnRow][randomnColumn]){
+//     compMiss();
+//     // Hit!!
+//     // If hit, hit function is invoked
+//   } else if(userDomGameBoard[randomnRow][randomnColumn]){
+//     compHit();
+//   }
+// }
+// computerFire();
 
 //Total number of hits per player to win is 17. So if any player gets hit 17 times the game is over.
 // Carrier     - 5 boxes/hits
@@ -171,7 +244,7 @@ function fire(){
 // Destroyer   - 3 boxes/hits
 // Submarine   - 3 boxes/hits
 // Patrol Boat - 2 boxes/hits
-const DomGameBoard = [
+const userDomGameBoard = [
   [0,0,0,0,0,0,0,0,0,0],
   [0,0,1,0,0,0,7,0,0,0],
   [0,0,1,0,0,0,7,0,0,0],
@@ -183,14 +256,19 @@ const DomGameBoard = [
   [0,0,0,6,6,6,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0]
 ];
-// function generateComputerShipPlacement(){
-//   const randomnRow = Math.floor(Math.random()*10);
-//   const randomnColumn = Math.floor(Math.random()*10);
-// }
-// generateComputerShipPlacement();
 
-//-->how do i randomnly generate each individual ship type/number to be aligned in correct order
-//   randomnly either vertically or horizontally anywhere on the board.
-
-//-->DomGameBoard[randomnRow] or [randomnColumn]
-//-->DomGameBoard[randomnRow or randomnColumn] shipNumber
+// const compDomGameBoard = [
+//   [0,0,0,0,0,0,0,0,0,0],
+//   [0,0,1,0,0,0,0,0,0,0],
+//   [0,0,1,0,7,7,7,0,0,0],
+//   [0,0,1,0,0,0,0,0,6,0],
+//   [0,0,1,0,0,0,0,0,6,0],
+//   [0,0,1,0,0,0,0,0,6,0],
+//   [0,0,0,0,4,4,0,0,0,0],
+//   [0,0,0,5,5,5,5,5,0,0],
+//   [0,0,0,0,0,0,0,0,0,0],
+//   [0,0,0,0,0,0,0,0,0,0]
+// ];
+// const randomnRow = Math.floor(Math.random()*10);
+// const randomnColumn = Math.floor(Math.random()*10);
+// console.log(compDomGameBoard[randomnRow][randomnColumn])
