@@ -1,8 +1,5 @@
 //PREDICAMENTS
 //MVP!!!
-//----->how do i get user to play again once he has a hit and to move to computer's turn when he/she misses.
-//----->how do i get computer to take a turn right after user clicks and misses
-//----->how to get computer to play again if it gets a hit and stop if it misses.
 //----->How can i get the computer to randomnly position his/her ships on the board at the start of the game?
 //----->When game is won how do i end game and restart.
 // FINISHED GAME
@@ -24,8 +21,9 @@ let playerTurn = true;
 const gameBoardContainer = document.getElementById('gameBoardDiv');
 //storing the main div containing the computer grid in a variable.
 const computerBoardContainer = document.getElementById('computerGameBoardDiv');
-
-// console.log(gameBoard);
+//storing ingame display box as variable
+let ingameDisplay = document.getElementsByClassName('displayText')[0];
+console.log(ingameDisplay);
 
 //CREATING USERS GRID!!
 //Generating boxes in the grid by adding extra divs to my gameBoard using a loop within a
@@ -96,7 +94,7 @@ function userFire(){
   function miss(){
     // for the user to know which square has been missed the box should be greyed out once click and missed
     currentGameBox.style.background = 'grey';
-    console.log('your torpedo missed!!');
+    ingameDisplay.textContent = 'YOUR TORPEDO MISSED!!';
     playerTurn = false;
     //for me as the developer to know which square has been missed
     return userDomGameBoard[currentRowNumber][currentColumnNumber] = 3;
@@ -132,31 +130,33 @@ function userFire(){
     }
     //Determine when ship has been destroyed
     if(carrier.length === 5){
-      console.log('You have destroyed computer\'s Aircraft Carrier!!');
-      return carrier = [];
+      ingameDisplay.innerHTML = ('You have destroyed computer\'s Aircraft Carrier!!');
+      console.log('You have destroyed computer\'s Aircraft Carrier!!'); 
+      carrier = [];
     } else if (patrolBoat.length === 2) {
-      console.log('You have destroyed computer\'s Patrol Boat!!');
-      return patrolBoat = [];
+      ingameDisplay.textContent = 'You have destroyed computer\'s Patrol Boat!!';
+      patrolBoat = [];
     } else if(battleShip.length === 4){
-      console.log('You have destroyed computer\'s Battle Ship!!');
-      return battleShip = [];
+      ingameDisplay.textContent = 'You have destroyed computer\'s Battle Ship!!';
+      battleShip = [];
     } else if (submarine.length === 3) {
-      console.log('You have destroyed computer\'s Submarine!!');
-      return submarine = [];
+      ingameDisplay.textContent = 'You have destroyed computer\'s Submarine!!';
+      submarine = [];
     } else if (destroyer.length === 3){
-      console.log('You have destroyed computer\'s Destroyer!!');
-      return destroyer = [];
+      ingameDisplay.textContent = 'You have destroyed computer\'s Destroyer!!';
+      destroyer = [];
     }
     //Win!!
-    if(userNumberOfHits === 17){
+    if(userNumberOfHits === 12){
       userWin();
     }
+    ingameDisplay.textContent = 'YOU   HAVE   HIT   COMPUTER\'S   SHIP!!';
     // console.log(userNumberOfHits);
   }
 
   // WIN FUNCTION
   function userWin(){
-    return console.log('you have sunk all of computers ships, you win!');
+    ingameDisplay.textContent = 'You have sunk all of computers ships, You Win!';
   }
 
   //HIT AND MISS CONDITION!!
@@ -197,16 +197,16 @@ function computerFire(){
   // console.log(compDomGameBoard[randomnRow][randomnColumn]);
   function compMiss(){
     compCurrentGameBox.style.background = 'grey';
-    console.log('Computer\'s torpedo missed you!!');
+    ingameDisplay.textContent = 'Computer\'s torpedo missed you!!';
     playerTurn = true;
     return compDomGameBoard[randomnRow][randomnColumn] = 3;
   }
   function compWin(){
-    return console.log('Computer has sunk all your ships, you Loose!!');
+    ingameDisplay.textContent = 'Computer has sunk all your ships, you Loose!!';
   }
   function compHit(){
     compCurrentGameBox.style.background = 'red';
-    console.log('Computer has hit your ship!!');
+    ingameDisplay.textContent = 'Computer has hit your ship!!';
     compNumberOfHits ++;
     //Determine type of ship hit and push the portion of the ship hit to their respective ship array.
     const userTypeOfShipHit = compDomGameBoard[randomnRow][randomnColumn] * 2;

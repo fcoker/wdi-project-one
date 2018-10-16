@@ -3,16 +3,32 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="style.css">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css"> -->
+  <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
   <title>My Battleship</title>
 </head>
 <body>
   <h1>Battle ship</h1>
+  <div class = 'ingameDisplay'>
+    <div class = 'circleFace'><img src='battleship img/juzo_okita_by_akiba165-d6sxsqy.jpg' class='captainHead'/></div>
+    <p class = 'displayText'></p>
+  </div>
   <div class = 'mainContainer columns'>
     <div id="gameBoardDiv" class='gameBoard column '>
     </div>
     <div id = 'computerGameBoardDiv' class ='computerGameBoard column '>
     </div>
+    <!-- <div class = 'shipLifeBar'>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div> -->
   </div>
 
   <script src="script.js" charset="utf-8"></script>

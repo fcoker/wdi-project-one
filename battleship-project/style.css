@@ -49,3 +49,40 @@ body{
   opacity: 0.6;
   /* position: relative; */
 }
+
+.ingameDisplay{
+  display: inline-flex;
+  background-color: yellow;
+  margin-left: 95vh;
+  background-color: yellow;
+  height: 25vh;
+  width: 85vh;
+  padding-bottom: 3vh;
+  border-radius: 3vh;
+}
+.shipLifeBar div{
+  border: solid;
+
+}
+.captainHead{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+}
+.circleFace{
+  background-color: green;
+  border-radius: 100%;
+  margin: 3vh;
+  width: 27vh;
+  height: 23vh;
+  position: relative;
+
+}
+p{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4vh;
+  text-align: center;
+}
