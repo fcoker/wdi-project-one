@@ -20,7 +20,7 @@
 const columns = 10;
 const rows = 10;
 let userNumberOfHits = 0;
-// let compNumberOfHits = 0;
+let compNumberOfHits = 0;
 
 //storing the main div containing the user grid in a variable.
 const gameBoardContainer = document.getElementById('gameBoardDiv');
@@ -174,85 +174,78 @@ function userFire(){
   currentGameBox.removeEventListener('click', userFire);
 }
 
-// COMPUTER'S MOVE AGAINST PLAYER!!
-// let compCarrier = [];
-// let compPatrolBoat = [];
-// let compBattleShip = [];
-// let compSubmarine = [];
-// let compDestroyer = [];
-//
-// //computer fire function!!
-// function computerFire(){
-//   const randomnRow = Math.floor(Math.random()*10);
-//   const randomnColumn = Math.floor(Math.random()*10);
-//   // (compDomGameBoard)keeps coming up as undefined even though it is defined globally!!
-//   // let currentDomCompChoice = compDomGameBoard[randomnRow][randomnColumn];
-//   const compCurrentGameBoxID = 'C' + randomnRow + randomnColumn;
-//   const compCurrentGameBox = document.getElementById(compCurrentGameBoxID);
-//   // console.log(compDomGameBoard[randomnRow][randomnColumn]);
-//
-//   function compMiss(){
-//     compCurrentGameBox.style.background = 'grey';
-//     console.log('Computer\'s torpedo missed you!!');
-//     return compDomGameBoard[randomnRow][randomnColumn] = 3;
-//   }
-//
-//   function compWin(){
-//     return console.log('Computer has sunk all your ships, you Loose!!');
-//   }
-//
-//   function compHit(){
-//     compCurrentGameBox.style.background = 'red';
-//     console.log('Computer has hit your ship!!');
-//     compNumberOfHits ++;
-//     //Determine type of ship hit and push the portion of the ship hit to their respective ship array.
-//     const userTypeOfShipHit = compDomGameBoard[randomnRow][randomnColumn] * 2;
-//     if(userTypeOfShipHit === 2){
-//       compCarrier.push(userTypeOfShipHit);
-//     } else if (userTypeOfShipHit === 8) {
-//       compPatrolBoat.push(userTypeOfShipHit);
-//     } else if (userTypeOfShipHit === 10) {
-//       compBattleShip.push(userTypeOfShipHit);
-//     } else if (userTypeOfShipHit === 12) {
-//       compSubmarine.push(userTypeOfShipHit);
-//     } else if(userTypeOfShipHit === 14){
-//       compDestroyer.push(userTypeOfShipHit);
-//     }
-//
-//     //Determine when ship has been destroyed
-//     if(compCarrier.length === 5){
-//       console.log('Computer has destroyed your Aircraft Carrier!!');
-//       return compCarrier = [];
-//     } else if (compPatrolBoat.length === 2) {
-//       console.log('Computer has destroyed your Patrol Boat!!');
-//       return compPatrolBoat = [];
-//     } else if(compBattleShip.length === 4){
-//       console.log('Computer has destroyed your Battle Ship!!');
-//       return compBattleShip = [];
-//     } else if (compSubmarine.length === 3) {
-//       console.log('Computer has destroyed your Submarine!!');
-//       return compSubmarine = [];
-//     } else if (compDestroyer.length === 3){
-//       console.log('Computer has destroyed your Destroyer!!');
-//       return compDestroyer = [];
-//     }
-//     if(compNumberOfHits === 17){
-//       compWin();
-//     }
-//   }
-//
-//   //HIT AND MISS CONDITION FOR COMPUTER!!
-//   //If miss, Miss function is invoked
-//   if(!compDomGameBoard[randomnRow][randomnColumn]){
-//     compMiss();
-//     // Hit!!
-//     // If hit, hit function is invoked
-//   } else if(userDomGameBoard[randomnRow][randomnColumn]){
-//     compHit();
-//   }
-// }
-// computerFire();
 
+//COMPUTER'S MOVE AGAINST PLAYER!!
+let compCarrier = [];
+let compPatrolBoat = [];
+let compBattleShip = [];
+let compSubmarine = [];
+let compDestroyer = [];
+//computer fire function!!
+function computerFire(){
+  const randomnRow = Math.floor(Math.random()*10);
+  const randomnColumn = Math.floor(Math.random()*10);
+  // (compDomGameBoard)keeps coming up as undefined even though it is defined globally!!
+  // let currentDomCompChoice = compDomGameBoard[randomnRow][randomnColumn];
+  const compCurrentGameBoxID = 'C' + randomnRow + randomnColumn;
+  const compCurrentGameBox = document.getElementById(compCurrentGameBoxID);
+  // console.log(compDomGameBoard[randomnRow][randomnColumn]);
+  function compMiss(){
+    compCurrentGameBox.style.background = 'grey';
+    console.log('Computer\'s torpedo missed you!!');
+    return compDomGameBoard[randomnRow][randomnColumn] = 3;
+  }
+  function compWin(){
+    return console.log('Computer has sunk all your ships, you Loose!!');
+  }
+  function compHit(){
+    compCurrentGameBox.style.background = 'red';
+    console.log('Computer has hit your ship!!');
+    compNumberOfHits ++;
+    //Determine type of ship hit and push the portion of the ship hit to their respective ship array.
+    const userTypeOfShipHit = compDomGameBoard[randomnRow][randomnColumn] * 2;
+    if(userTypeOfShipHit === 2){
+      compCarrier.push(userTypeOfShipHit);
+    } else if (userTypeOfShipHit === 8) {
+      compPatrolBoat.push(userTypeOfShipHit);
+    } else if (userTypeOfShipHit === 10) {
+      compBattleShip.push(userTypeOfShipHit);
+    } else if (userTypeOfShipHit === 12) {
+      compSubmarine.push(userTypeOfShipHit);
+    } else if(userTypeOfShipHit === 14){
+      compDestroyer.push(userTypeOfShipHit);
+    }
+    //Determine when ship has been destroyed
+    if(compCarrier.length === 5){
+      console.log('Computer has destroyed your Aircraft Carrier!!');
+      return compCarrier = [];
+    } else if (compPatrolBoat.length === 2) {
+      console.log('Computer has destroyed your Patrol Boat!!');
+      return compPatrolBoat = [];
+    } else if(compBattleShip.length === 4){
+      console.log('Computer has destroyed your Battle Ship!!');
+      return compBattleShip = [];
+    } else if (compSubmarine.length === 3) {
+      console.log('Computer has destroyed your Submarine!!');
+      return compSubmarine = [];
+    } else if (compDestroyer.length === 3){
+      console.log('Computer has destroyed your Destroyer!!');
+      return compDestroyer = [];
+    }
+    if(compNumberOfHits === 17){
+      compWin();
+    }
+  }
+  //HIT AND MISS CONDITION FOR COMPUTER!!
+  //If miss, Miss function is invoked
+  if(!compDomGameBoard[randomnRow][randomnColumn]){
+    compMiss();
+    // Hit!!
+    // If hit, hit function is invoked
+  } else if(compDomGameBoard[randomnRow][randomnColumn]){
+    compHit();
+  }
+}
 //Total number of hits per player to win is 17. So if any player gets hit 17 times the game is over.
 // Carrier     - 5 boxes/hits
 // Battleship  - 4 boxes/hits
@@ -271,19 +264,19 @@ const userDomGameBoard = [
   [0,0,0,6,6,6,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0]
 ];
-
-// const compDomGameBoard = [
-//   [0,0,0,0,0,0,0,0,0,0],
-//   [0,0,1,0,0,0,0,0,0,0],
-//   [0,0,1,0,7,7,7,0,0,0],
-//   [0,0,1,0,0,0,0,0,6,0],
-//   [0,0,1,0,0,0,0,0,6,0],
-//   [0,0,1,0,0,0,0,0,6,0],
-//   [0,0,0,0,4,4,0,0,0,0],
-//   [0,0,0,5,5,5,5,5,0,0],
-//   [0,0,0,0,0,0,0,0,0,0],
-//   [0,0,0,0,0,0,0,0,0,0]
-// ];
+const compDomGameBoard = [
+  [0,0,0,0,0,0,0,0,0,0],
+  [0,0,1,0,0,0,0,0,0,0],
+  [0,0,1,0,7,7,7,0,0,0],
+  [0,0,1,0,0,0,0,0,6,0],
+  [0,0,1,0,0,0,0,0,6,0],
+  [0,0,1,0,0,0,0,0,6,0],
+  [0,0,0,0,4,4,0,0,0,0],
+  [0,0,0,5,5,5,5,5,0,0],
+  [0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0]
+];
 // const randomnRow = Math.floor(Math.random()*10);
 // const randomnColumn = Math.floor(Math.random()*10);
+// computerFire();
 // console.log(compDomGameBoard[randomnRow][randomnColumn])
