@@ -1,8 +1,5 @@
 //PREDICAMENTS
 //MVP!!!
-//----->compDomGameBoard keeps coming up as undefined. When i console.log it on a global scope it works
-//      but within the computerFire function it doesnt work.(userDomGameBoard works perfect in
-//      function scope but only when all of 'COMPUTER AGAINST PLAYER' is commented out).
 //----->how do i get user to play again once he has a hit and to move to computer's turn when he/she misses.
 //----->how do i get computer to take a turn right after user clicks and misses
 //----->how to get computer to play again if it gets a hit and stop if it misses.
@@ -21,6 +18,7 @@ const columns = 10;
 const rows = 10;
 let userNumberOfHits = 0;
 let compNumberOfHits = 0;
+let playerTurn = true:
 
 //storing the main div containing the user grid in a variable.
 const gameBoardContainer = document.getElementById('gameBoardDiv');
@@ -269,13 +267,39 @@ const compDomGameBoard = [
   [0,0,1,0,0,0,0,0,0,0],
   [0,0,1,0,7,7,7,0,0,0],
   [0,0,1,0,0,0,0,0,6,0],
+  [0,0,1,0,4,4,0,0,6,0],
   [0,0,1,0,0,0,0,0,6,0],
-  [0,0,1,0,0,0,0,0,6,0],
-  [0,0,0,0,4,4,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0],
   [0,0,0,5,5,5,5,5,0,0],
   [0,0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0]
 ];
+//Positions of my ships on computers board.
+for(let compRow = 0; compRow < compDomGameBoard.length; compRow++){
+  for(let compColumn = 0; compColumn < compDomGameBoard[compRow].length; compColumn++){
+    if(compDomGameBoard[compRow][compColumn] === 1){
+      const userCarrierBoxPositionID = 'C' + compRow + compColumn;
+      const userCarrierBoxPosition = document.getElementById(userCarrierBoxPositionID);
+      userCarrierBoxPosition.style.background = 'black';
+    } else if(compDomGameBoard[compRow][compColumn] === 5){
+      const userCarrierBoxPositionID = 'C' + compRow + compColumn;
+      const userCarrierBoxPosition = document.getElementById(userCarrierBoxPositionID);
+      userCarrierBoxPosition.style.background = 'black';
+    } else if(compDomGameBoard[compRow][compColumn] === 6){
+      const userCarrierBoxPositionID = 'C' + compRow + compColumn;
+      const userCarrierBoxPosition = document.getElementById(userCarrierBoxPositionID);
+      userCarrierBoxPosition.style.background = 'black';
+    } else if(compDomGameBoard[compRow][compColumn] === 7){
+      const userCarrierBoxPositionID = 'C' + compRow + compColumn;
+      const userCarrierBoxPosition = document.getElementById(userCarrierBoxPositionID);
+      userCarrierBoxPosition.style.background = 'black';
+    } else if(compDomGameBoard[compRow][compColumn] === 4){
+      const userCarrierBoxPositionID = 'C' + compRow + compColumn;
+      const userCarrierBoxPosition = document.getElementById(userCarrierBoxPositionID);
+      userCarrierBoxPosition.style.background = 'black';
+    }
+  }
+}
 // const randomnRow = Math.floor(Math.random()*10);
 // const randomnColumn = Math.floor(Math.random()*10);
 // computerFire();
