@@ -18,7 +18,7 @@ const columns = 10;
 const rows = 10;
 let userNumberOfHits = 0;
 let compNumberOfHits = 0;
-let playerTurn = true:
+let playerTurn = true;
 
 //storing the main div containing the user grid in a variable.
 const gameBoardContainer = document.getElementById('gameBoardDiv');
@@ -97,8 +97,10 @@ function userFire(){
     // for the user to know which square has been missed the box should be greyed out once click and missed
     currentGameBox.style.background = 'grey';
     console.log('your torpedo missed!!');
+    playerTurn = false;
     //for me as the developer to know which square has been missed
     return userDomGameBoard[currentRowNumber][currentColumnNumber] = 3;
+
   }
 
   //HIT FUNCTION!!
@@ -170,6 +172,10 @@ function userFire(){
 
   //Remove event listener from each box clicked once they have been clicked.
   currentGameBox.removeEventListener('click', userFire);
+  if (!playerTurn){
+
+    setTimeout(computerFire, 1000);
+  }
 }
 
 
@@ -179,6 +185,7 @@ let compPatrolBoat = [];
 let compBattleShip = [];
 let compSubmarine = [];
 let compDestroyer = [];
+
 //computer fire function!!
 function computerFire(){
   const randomnRow = Math.floor(Math.random()*10);
@@ -191,6 +198,7 @@ function computerFire(){
   function compMiss(){
     compCurrentGameBox.style.background = 'grey';
     console.log('Computer\'s torpedo missed you!!');
+    playerTurn = true;
     return compDomGameBoard[randomnRow][randomnColumn] = 3;
   }
   function compWin(){
@@ -242,6 +250,10 @@ function computerFire(){
     // If hit, hit function is invoked
   } else if(compDomGameBoard[randomnRow][randomnColumn]){
     compHit();
+  }
+  if (!playerTurn){
+
+    setTimeout(computerFire, 1000);
   }
 }
 //Total number of hits per player to win is 17. So if any player gets hit 17 times the game is over.
