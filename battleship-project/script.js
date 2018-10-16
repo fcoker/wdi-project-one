@@ -116,41 +116,45 @@ function userFire(){
     //5 -->Battle Ship------------------->Once Hit changes to 10
     //6 -->Submarine--------------------->Once Hit changes to 12
     //7 -->Destroyer--------------------->Once Hit changes to 14
-    const compTypeOfShipHit= userDomGameBoard[currentRowNumber][currentColumnNumber] * 2;
-    if(compTypeOfShipHit === 2){
-      carrier.push(compTypeOfShipHit);
-    } else if (compTypeOfShipHit === 8) {
-      patrolBoat.push(compTypeOfShipHit);
-    } else if (compTypeOfShipHit === 10) {
-      battleShip.push(compTypeOfShipHit);
-    } else if (compTypeOfShipHit === 12) {
-      submarine.push(compTypeOfShipHit);
-    } else if(compTypeOfShipHit === 14){
-      destroyer.push(compTypeOfShipHit);
-    }
-    //Determine when ship has been destroyed
-    if(carrier.length === 5){
-      ingameDisplay.innerHTML = ('You have destroyed computer\'s Aircraft Carrier!!');
-      console.log('You have destroyed computer\'s Aircraft Carrier!!'); 
-      carrier = [];
-    } else if (patrolBoat.length === 2) {
-      ingameDisplay.textContent = 'You have destroyed computer\'s Patrol Boat!!';
-      patrolBoat = [];
-    } else if(battleShip.length === 4){
-      ingameDisplay.textContent = 'You have destroyed computer\'s Battle Ship!!';
-      battleShip = [];
-    } else if (submarine.length === 3) {
-      ingameDisplay.textContent = 'You have destroyed computer\'s Submarine!!';
-      submarine = [];
-    } else if (destroyer.length === 3){
-      ingameDisplay.textContent = 'You have destroyed computer\'s Destroyer!!';
-      destroyer = [];
+    function userDestroyShip(){
+      const compTypeOfShipHit= userDomGameBoard[currentRowNumber][currentColumnNumber] * 2;
+      if(compTypeOfShipHit === 2){
+        carrier.push(compTypeOfShipHit);
+      } else if (compTypeOfShipHit === 8) {
+        patrolBoat.push(compTypeOfShipHit);
+      } else if (compTypeOfShipHit === 10) {
+        battleShip.push(compTypeOfShipHit);
+      } else if (compTypeOfShipHit === 12) {
+        submarine.push(compTypeOfShipHit);
+      } else if(compTypeOfShipHit === 14){
+        destroyer.push(compTypeOfShipHit);
+        //Determine when ship has been destroyed
+
+      }
+
+      if(carrier.length === 5){
+        ingameDisplay.innerHTML = ('You have destroyed computer\'s Aircraft Carrier!!');
+        carrier = [];
+      } else if (patrolBoat.length === 2) {
+        ingameDisplay.textContent = 'You have destroyed computer\'s Patrol Boat!!';
+        patrolBoat = [];
+      } else if(battleShip.length === 4){
+        ingameDisplay.textContent = 'You have destroyed computer\'s Battle Ship!!';
+        battleShip = [];
+      } else if (submarine.length === 3) {
+        ingameDisplay.textContent = 'You have destroyed computer\'s Submarine!!';
+        submarine = [];
+      } else if (destroyer.length === 3){
+        ingameDisplay.textContent = 'You have destroyed computer\'s Destroyer!!';
+        destroyer = [];
+      }
     }
     //Win!!
     if(userNumberOfHits === 12){
       userWin();
     }
     ingameDisplay.textContent = 'YOU   HAVE   HIT   COMPUTER\'S   SHIP!!';
+    userDestroyShip();
     // console.log(userNumberOfHits);
   }
 
@@ -177,6 +181,7 @@ function userFire(){
     setTimeout(computerFire, 1000);
   }
 }
+// if(!playerTurn)
 
 
 //COMPUTER'S MOVE AGAINST PLAYER!!
@@ -209,35 +214,38 @@ function computerFire(){
     ingameDisplay.textContent = 'Computer has hit your ship!!';
     compNumberOfHits ++;
     //Determine type of ship hit and push the portion of the ship hit to their respective ship array.
-    const userTypeOfShipHit = compDomGameBoard[randomnRow][randomnColumn] * 2;
-    if(userTypeOfShipHit === 2){
-      compCarrier.push(userTypeOfShipHit);
-    } else if (userTypeOfShipHit === 8) {
-      compPatrolBoat.push(userTypeOfShipHit);
-    } else if (userTypeOfShipHit === 10) {
-      compBattleShip.push(userTypeOfShipHit);
-    } else if (userTypeOfShipHit === 12) {
-      compSubmarine.push(userTypeOfShipHit);
-    } else if(userTypeOfShipHit === 14){
-      compDestroyer.push(userTypeOfShipHit);
+    function compDestroyedShips(){
+      const userTypeOfShipHit = compDomGameBoard[randomnRow][randomnColumn] * 2;
+      if(userTypeOfShipHit === 2){
+        compCarrier.push(userTypeOfShipHit);
+      } else if (userTypeOfShipHit === 8) {
+        compPatrolBoat.push(userTypeOfShipHit);
+      } else if (userTypeOfShipHit === 10) {
+        compBattleShip.push(userTypeOfShipHit);
+      } else if (userTypeOfShipHit === 12) {
+        compSubmarine.push(userTypeOfShipHit);
+      } else if(userTypeOfShipHit === 14){
+        compDestroyer.push(userTypeOfShipHit);
+      }
+      //Determine when ship has been destroyed
+      if(compCarrier.length === 5){
+        ingameDisplay.textContent = 'Computer has destroyed your Aircraft Carrier!!';
+        return compCarrier = [];
+      } else if (compPatrolBoat.length === 2) {
+        ingameDisplay.textContent = 'Computer has destroyed your Patrol Boat!!';
+        return compPatrolBoat = [];
+      } else if(compBattleShip.length === 4){
+        ingameDisplay.textContent = 'Computer has destroyed your Battle Ship!!';
+        return compBattleShip = [];
+      } else if (compSubmarine.length === 3) {
+        ingameDisplay.textContent = 'Computer has destroyed your Submarine!!';
+        return compSubmarine = [];
+      } else if (compDestroyer.length === 3){
+        ingameDisplay.textContent = 'Computer has destroyed your Destroyer!!';
+        return compDestroyer = [];
+      }
     }
-    //Determine when ship has been destroyed
-    if(compCarrier.length === 5){
-      console.log('Computer has destroyed your Aircraft Carrier!!');
-      return compCarrier = [];
-    } else if (compPatrolBoat.length === 2) {
-      console.log('Computer has destroyed your Patrol Boat!!');
-      return compPatrolBoat = [];
-    } else if(compBattleShip.length === 4){
-      console.log('Computer has destroyed your Battle Ship!!');
-      return compBattleShip = [];
-    } else if (compSubmarine.length === 3) {
-      console.log('Computer has destroyed your Submarine!!');
-      return compSubmarine = [];
-    } else if (compDestroyer.length === 3){
-      console.log('Computer has destroyed your Destroyer!!');
-      return compDestroyer = [];
-    }
+    compDestroyedShips();
     if(compNumberOfHits === 17){
       compWin();
     }
