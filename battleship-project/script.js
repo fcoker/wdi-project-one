@@ -9,6 +9,30 @@
 //----->animations for hit and miss functions that explode on ship or drop into the water
 //----->sound for FIRE functions
 //----->ingame display box with animated captain head showing relevant messages and alerts
+const userDomGameBoard = [
+  [0,0,0,0,0,0,0,0,0,0],
+  [0,0,1,0,0,0,7,0,0,0],
+  [0,0,1,0,0,0,7,0,0,0],
+  [0,0,1,0,4,0,7,0,0,0],
+  [0,0,1,0,4,0,0,0,0,0],
+  [0,0,1,0,0,0,0,0,0,0],
+  [0,0,0,5,5,5,5,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,6,6,6,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0]
+];
+const compDomGameBoard = [
+  [0,0,0,0,0,0,0,0,0,0],
+  [0,0,1,0,0,0,0,0,0,0],
+  [0,0,1,0,7,7,7,0,0,0],
+  [0,0,1,0,0,0,0,0,6,0],
+  [0,0,1,0,4,4,0,0,6,0],
+  [0,0,1,0,0,0,0,0,6,0],
+  [0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,5,5,5,5,5,0,0],
+  [0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0]
+];
 
 //set the rows and colums
 const columns = 10;
@@ -23,7 +47,7 @@ const gameBoardContainer = document.getElementById('gameBoardDiv');
 const computerBoardContainer = document.getElementById('computerGameBoardDiv');
 //storing ingame display box as variable
 let ingameDisplay = document.getElementsByClassName('displayText')[0];
-console.log(ingameDisplay);
+// console.log(ingameDisplay);
 
 //CREATING USERS GRID!!
 //Generating boxes in the grid by adding extra divs to my gameBoard using a loop within a
@@ -192,28 +216,47 @@ let compSubmarine = [];
 let compDestroyer = [];
 
 // function compRandomnChoice(){
-//   const randomnRow = Math.floor(Math.random()*10);
-//   const randomnColumn = Math.floor(Math.random()*10);
-//   const compCurrentDomChoice = compDomGameBoard[randomnRow][randomnColumn];
-//   const compCurrentGameBoxID = 'C' + randomnRow + randomnColumn;
+//   const randomRow = Math.floor(Math.random()*10);
+//   const randomColumn = Math.floor(Math.random()*10);
+//   const compCurrentDomChoice = compDomGameBoard[randomRow][randomColumn];
+//   const compCurrentGameBoxID = 'C' + randomRow + randomColumn;
 //   const compCurrentGameBox = document.getElementById(compCurrentGameBoxID);
 //   return compCurrentDomChoice;
 // }
 //computer fire function!!
+
+function squareIsAlreadyHit(row, column) {
+  const square = compDomGameBoard[row][column];
+  return [2, 3, 8, 10, 12, 14].includes(square);
+}
+
+function chooseRandomUntriedSquare() {
+  let randomRow = Math.floor(Math.random()*10);
+  let randomColumn = Math.floor(Math.random()*10);
+  while (squareIsAlreadyHit(randomRow, randomColumn)) {
+    console.log(randomRow, randomColumn, 'already hit! Trying again...');
+    randomRow = Math.floor(Math.random()*10);
+    randomColumn = Math.floor(Math.random()*10);
+  }
+  return [randomRow, randomColumn];
+}
+
 function computerFire(){
-  const randomnRow = Math.floor(Math.random()*10);
-  const randomnColumn = Math.floor(Math.random()*10);
-  const compCurrentGameBoxID = 'C' + randomnRow + randomnColumn;
+  const randomRowAndColumn = chooseRandomUntriedSquare();
+  const randomRow = randomRowAndColumn[0];
+  const randomColumn = randomRowAndColumn[1];
+  const compCurrentGameBoxID = 'C' + randomRow + randomColumn;
   const compCurrentGameBox = document.getElementById(compCurrentGameBoxID);
-  // console.log(compDomGameBoard[randomnRow][randomnColumn]);
-  let compCurrentDomChoice = compDomGameBoard[randomnRow][randomnColumn];
+  // console.log(compDomGameBoard[randomRow][randomColumn]);
+  const compCurrentDomChoice = compDomGameBoard[randomRow][randomColumn];
   function compMiss(){
     compCurrentGameBox.style.background = 'grey';
     ingameDisplay.textContent = 'Computer\'s torpedo missed you!!';
     playerTurn = true;
-    return compCurrentDomChoice = 3;
+    // console.log(compCurrentDomChoice);
+    compDomGameBoard[randomRow][randomColumn] = 3;
   }
-
+  console.log(compCurrentDomChoice);
   function compWin(){
     ingameDisplay.textContent = 'Computer has sunk all your ships, you Loose!!';
   }
@@ -222,6 +265,7 @@ function computerFire(){
     ingameDisplay.textContent = 'Computer has hit your ship!!';
     compNumberOfHits ++;
     const userTypeOfShipHit = compCurrentDomChoice * 2;
+    compDomGameBoard[randomRow][randomColumn] = userTypeOfShipHit;
     //Determine type of ship hit and push the portion of the ship hit to their respective ship array.
     function compDestroyedShips(){
       if(userTypeOfShipHit === 2){
@@ -260,7 +304,8 @@ function computerFire(){
   }
   //HIT AND MISS CONDITION FOR COMPUTER!!
   //If miss, Miss function is invoked
-  if(!compCurrentDomChoice){
+  //  Check for an empty square or an already missed square
+  if(compCurrentDomChoice === 0 || compCurrentDomChoice === 3){
     compMiss();
     // Hit!!
     // If hit, hit function is invoked
@@ -278,30 +323,7 @@ function computerFire(){
 // Destroyer   - 3 boxes/hits
 // Submarine   - 3 boxes/hits
 // Patrol Boat - 2 boxes/hits
-const userDomGameBoard = [
-  [0,0,0,0,0,0,0,0,0,0],
-  [0,0,1,0,0,0,7,0,0,0],
-  [0,0,1,0,0,0,7,0,0,0],
-  [0,0,1,0,4,0,7,0,0,0],
-  [0,0,1,0,4,0,0,0,0,0],
-  [0,0,1,0,0,0,0,0,0,0],
-  [0,0,0,5,5,5,5,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,6,6,6,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0]
-];
-const compDomGameBoard = [
-  [0,0,0,0,0,0,0,0,0,0],
-  [0,0,1,0,0,0,0,0,0,0],
-  [0,0,1,0,7,7,7,0,0,0],
-  [0,0,1,0,0,0,0,0,6,0],
-  [0,0,1,0,4,4,0,0,6,0],
-  [0,0,1,0,0,0,0,0,6,0],
-  [0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,5,5,5,5,5,0,0],
-  [0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0]
-];
+
 //Positions of my ships on computers board.
 for(let compRow = 0; compRow < compDomGameBoard.length; compRow++){
   for(let compColumn = 0; compColumn < compDomGameBoard[compRow].length; compColumn++){
@@ -328,7 +350,7 @@ for(let compRow = 0; compRow < compDomGameBoard.length; compRow++){
     }
   }
 }
-// const randomnRow = Math.floor(Math.random()*10);
-// const randomnColumn = Math.floor(Math.random()*10);
+// const randomRow = Math.floor(Math.random()*10);
+// const randomColumn = Math.floor(Math.random()*10);
 // computerFire();
-// console.log(compDomGameBoard[randomnRow][randomnColumn])
+// console.log(compDomGameBoard[randomRow][randomColumn])

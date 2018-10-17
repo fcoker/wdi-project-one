@@ -96,7 +96,7 @@ header {
   font-size: 5vh;
   text-align: center;
   color: silver;
-  margin-top: 5vh;
+  margin-top: -10px;;
   background: -webkit-linear-gradient(#F0F0F0, #989898);
  -webkit-background-clip: text;
  -webkit-text-fill-color: transparent;
@@ -138,10 +138,34 @@ header {
 
 footer {
   height: 90px;
-  background-color: black;
   color: white;
   padding: 50px;
   margin-top: 13px;
+  background-image: url('battleship img/battleship new/battle new/steel-2737105_1280.jpg');
+  border-radius: 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+footer p{
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 24px;
+}
+h2{
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bolder;
+  background-color: grey;
+  margin-bottom: 0px;
+  margin-bottom: 0px;
+  padding-top: 9px;
+}
+h3{
+  margin-top: -30px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 33px;
 }
 
 .carrier {
