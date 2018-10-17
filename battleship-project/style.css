@@ -19,11 +19,20 @@ body{
   justify-content: space-around;
   opacity: 0.8;
   margin-top: 60px;
+  margin-top: -19px;
 }
 
 header {
   display: flex;
   justify-content: space-around;
+  margin-top: 21px;
+}
+.battleshipLogo{
+  height: 143px;
+  opacity: 0.7;
+  border-radius: 35px;
+  width: 362px;
+  margin-left: 70px;
 }
 
 .userArea, .computerArea {
@@ -116,6 +125,7 @@ header {
   border: solid;
   background: url('battleship img/battleship new/battle new/steel-2737105_1280.jpg');
   flex-basis: 40%;
+  margin-right: 75px;
 }
 .shipNumber{
   border: solid;
@@ -185,4 +195,9 @@ h3{
 .patrol-boat {
   background-image: url('battleship img/ships/patrol boat.jpg');
   background-position-y: 63px;
+}
+
+.instructionParagraph{
+  line-height: 24pt;
+  margin-top: -29px;
 }

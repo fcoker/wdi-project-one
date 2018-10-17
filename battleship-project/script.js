@@ -8,8 +8,18 @@
 //----->allow computer randmonly place all ships on board at the start of the game.
 //----->animations for hit and miss functions that explode on ship or drop into the water
 //----->sound for FIRE functions
-//----->ingame display box with animated captain head showing relevant messages and alerts
-const userDomGameBoard = [
+
+//User gameboard containing position of all hits, misses and location of computers ships.
+// NUMBER CODE AND MEANING!
+// 0 represents all empty boxes on the gameBoard
+// 3 represents a miss when an empty box with no ship on it is clicked
+// 1 represents the position of a carrier on the box
+// 4 represents the position of a Patrol Boat on the box
+// 5 represents the position of a Battle Ship on the box
+// 6 represents the position of a Submarine on the box
+// 7 represents the position of a Destroyer on the box
+// 2 * box number represents a hit on a ship if correct location box of ship is located
+const userActualGameBoard = [
   [0,0,0,0,0,0,0,0,0,0],
   [0,0,1,0,0,0,7,0,0,0],
   [0,0,1,0,0,0,7,0,0,0],
@@ -21,7 +31,8 @@ const userDomGameBoard = [
   [0,0,0,6,6,6,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0]
 ];
-const compDomGameBoard = [
+//Computer gameboard containing position of all hits, misses and location of computers ships.
+const compActualGameBoard = [
   [0,0,0,0,0,0,0,0,0,0],
   [0,0,1,0,0,0,0,0,0,0],
   [0,0,1,0,7,7,7,0,0,0],
@@ -34,7 +45,7 @@ const compDomGameBoard = [
   [0,0,0,0,0,0,0,0,0,0]
 ];
 
-//set the rows and colums
+//Setting the rows and colums for the DOM game board
 const columns = 10;
 const rows = 10;
 let userNumberOfHits = 0;
@@ -42,24 +53,24 @@ let compNumberOfHits = 0;
 let playerTurn = true;
 
 //storing the main div containing the user grid in a variable.
-const gameBoardContainer = document.getElementById('gameBoardDiv');
+const userDomGameContainer = document.getElementById('gameBoardDiv');
 //storing the main div containing the computer grid in a variable.
-const computerBoardContainer = document.getElementById('computerGameBoardDiv');
+const compDomGameContainer = document.getElementById('computerGameBoardDiv');
 //storing ingame display box as variable
-let ingameDisplay = document.getElementsByClassName('displayText')[0];
+const ingameDisplay = document.getElementsByClassName('displayText')[0];
 // console.log(ingameDisplay);
 
 //CREATING USERS GRID!!
-//Generating boxes in the grid by adding extra divs to my gameBoard using a loop within a
-//loop to create and id the extra divs in rows and columns
+//Generating boxes in the grid by adding extra divs to my DOM gameBoard using a loop within a
+//loop to create and id the new divs in rows and columns
 for(let i=0; i < columns; i++){
   for(let j=0; j< rows; j++){
     const box = document.createElement('div');
-    gameBoardContainer.appendChild(box);
+    userDomGameContainer.appendChild(box);
 
     //add individual id's to each box right after they've been made.
     box.id = 'B' + i  + j;
-    //add the same class to all clickable boxes
+    //adding the same class to all clickable boxes
     box.className = 'userIndividualBoxes';
   }
 }
@@ -67,18 +78,17 @@ for(let i=0; i < columns; i++){
 for(let i=0; i < columns; i++){
   for(let j=0; j< rows; j++){
     const box = document.createElement('div');
-    computerBoardContainer.appendChild(box);
+    compDomGameContainer.appendChild(box);
 
-    //add individual id's to each box right after they've been made.
+    //adding individual id's to each box right after they've been made.
     box.id = 'C' + i  + j;
-    //add the same class to all clickable boxes
+    //adding the same class to all clickable boxes
     box.className = 'compIndividualBoxes';
-
   }
 }
 //storing individual game boxes in a variable
-const UserIndividualGameBoxes = document.querySelectorAll('.userIndividualBoxes');
-// console.log(UserIndividualGameBoxes);
+const userIndividualDomGameBoxes = document.querySelectorAll('.userIndividualBoxes');
+// console.log(userIndividualDomGameBoxes);
 
 //PLAYER'S MOVE AGAINST COMPUTER!!
 //Type of ships arrays, once portion of ship is damaged it is pushed into its respective array
@@ -89,7 +99,7 @@ let submarine = [];
 let destroyer = [];
 
 //Event listeners for all boxes.
-UserIndividualGameBoxes.forEach(box =>{
+userIndividualDomGameBoxes.forEach(box =>{
   box.addEventListener('click', userFire);
 });
 
@@ -103,25 +113,16 @@ function userFire(){
   const currentGameBox = event.target;
   // console.log(currentColumn);
 
-  // NUMBER CODE AND MEANING!
-  // 0 represents all empty boxes on the gameBoard
-  // 3 represents a miss when an empty box with no ship on it is clicked
-  // 1 represents the position of a carrier on the box
-  // 4 represents the position of a Patrol Boat on the box
-  // 5 represents the position of a Battle Ship on the box
-  // 6 represents the position of a Submarine on the box
-  // 7 represents the position of a Destroyer on the box
-  // 2 * box number represents a hit on a ship if correct location box of ship is located
 
   //MISS FUNCTION!!
-  //miss function changes specific box to 3 if miss. it should also change the shade of color to grey
+  //miss function changes specific box to 3 if miss. it should also change the shade of color in the DOM box to grey
   function miss(){
-    // for the user to know which square has been missed the box should be greyed out once click and missed
+    // for the user to know which square has been missed the DOM box should be greyed out once click and missed
     currentGameBox.style.background = 'grey';
     ingameDisplay.textContent = 'YOUR TORPEDO MISSED!!';
     playerTurn = false;
     //for me as the developer to know which square has been missed
-    return userDomGameBoard[currentRowNumber][currentColumnNumber] = 3;
+    return userActualGameBoard[currentRowNumber][currentColumnNumber] = 3;
 
   }
 
@@ -140,8 +141,10 @@ function userFire(){
     //5 -->Battle Ship------------------->Once Hit changes to 10
     //6 -->Submarine--------------------->Once Hit changes to 12
     //7 -->Destroyer--------------------->Once Hit changes to 14
+
+    //DETERMINING TYPE OF SHIP HIT
     function userDestroyShip(){
-      const compTypeOfShipHit= userDomGameBoard[currentRowNumber][currentColumnNumber] * 2;
+      const compTypeOfShipHit= userActualGameBoard[currentRowNumber][currentColumnNumber] * 2;
       if(compTypeOfShipHit === 2){
         carrier.push(compTypeOfShipHit);
       } else if (compTypeOfShipHit === 8) {
@@ -152,10 +155,9 @@ function userFire(){
         submarine.push(compTypeOfShipHit);
       } else if(compTypeOfShipHit === 14){
         destroyer.push(compTypeOfShipHit);
-        //Determine when ship has been destroyed
-
       }
 
+      //DETERMINING TYPE OF SHIP DESTROYED
       if(carrier.length === 5){
         ingameDisplay.innerHTML = ('You have destroyed computer\'s Aircraft Carrier!!');
         carrier = [];
@@ -189,11 +191,11 @@ function userFire(){
 
   //HIT AND MISS CONDITION!!
   //If miss, Miss function is invoked
-  if(!userDomGameBoard[currentRowNumber][currentColumnNumber]){
+  if(!userActualGameBoard[currentRowNumber][currentColumnNumber]){
     miss();
     //Hit!!
     //If hit, hit function is invoked
-  } else if(userDomGameBoard[currentRowNumber][currentColumnNumber]){
+  } else if(userActualGameBoard[currentRowNumber][currentColumnNumber]){
     hit();
   }
   // console.log('clicked ' +'currentRow :' + currentRow + ' current column :' + currentColumn);
@@ -215,21 +217,14 @@ let compBattleShip = [];
 let compSubmarine = [];
 let compDestroyer = [];
 
-// function compRandomnChoice(){
-//   const randomRow = Math.floor(Math.random()*10);
-//   const randomColumn = Math.floor(Math.random()*10);
-//   const compCurrentDomChoice = compDomGameBoard[randomRow][randomColumn];
-//   const compCurrentGameBoxID = 'C' + randomRow + randomColumn;
-//   const compCurrentGameBox = document.getElementById(compCurrentGameBoxID);
-//   return compCurrentDomChoice;
-// }
-//computer fire function!!
 
+//computer fire function!!
+//Check if square has already been hit previously by computer
 function squareIsAlreadyHit(row, column) {
-  const square = compDomGameBoard[row][column];
+  const square = compActualGameBoard[row][column];
   return [2, 3, 8, 10, 12, 14].includes(square);
 }
-
+//Computer choice of random un-hit box to fire
 function chooseRandomUntriedSquare() {
   let randomRow = Math.floor(Math.random()*10);
   let randomColumn = Math.floor(Math.random()*10);
@@ -240,33 +235,37 @@ function chooseRandomUntriedSquare() {
   }
   return [randomRow, randomColumn];
 }
-
+//COMPUTER FIRE FUNCTION
 function computerFire(){
   const randomRowAndColumn = chooseRandomUntriedSquare();
   const randomRow = randomRowAndColumn[0];
   const randomColumn = randomRowAndColumn[1];
   const compCurrentGameBoxID = 'C' + randomRow + randomColumn;
   const compCurrentGameBox = document.getElementById(compCurrentGameBoxID);
-  // console.log(compDomGameBoard[randomRow][randomColumn]);
-  const compCurrentDomChoice = compDomGameBoard[randomRow][randomColumn];
+  // console.log(compActualGameBoard[randomRow][randomColumn]);
+  const compCurrentDomChoice = compActualGameBoard[randomRow][randomColumn];
+
+  //Computer miss function
   function compMiss(){
     compCurrentGameBox.style.background = 'grey';
     ingameDisplay.textContent = 'Computer\'s torpedo missed you!!';
     playerTurn = true;
     // console.log(compCurrentDomChoice);
-    compDomGameBoard[randomRow][randomColumn] = 3;
+    compActualGameBoard[randomRow][randomColumn] = 3;
   }
-  console.log(compCurrentDomChoice);
+  // console.log(compCurrentDomChoice);
+  //computer win function
   function compWin(){
     return ingameDisplay.textContent = 'Computer has sunk all your ships, you Loose!!';
   }
+  //computer hit function
   function compHit(){
     compCurrentGameBox.style.background = 'red';
     ingameDisplay.textContent = 'Computer has hit your ship!!';
     compNumberOfHits ++;
     const userTypeOfShipHit = compCurrentDomChoice * 2;
-    compDomGameBoard[randomRow][randomColumn] = userTypeOfShipHit;
-    //Determine type of ship hit and push the portion of the ship hit to their respective ship array.
+    compActualGameBoard[randomRow][randomColumn] = userTypeOfShipHit;
+    //Determine type of user ship hit and push the portion of the ship hit to their respective ship array.
     function compDestroyedShips(){
       if(userTypeOfShipHit === 2){
         compCarrier.push(userTypeOfShipHit);
@@ -279,7 +278,7 @@ function computerFire(){
       } else if(userTypeOfShipHit === 14){
         compDestroyer.push(userTypeOfShipHit);
       }
-      //Determine when ship has been destroyed
+      //Determine when user ship has been destroyed
       if(compCarrier.length === 5){
         ingameDisplay.textContent = 'Computer has destroyed your Aircraft Carrier!!';
         return compCarrier = [];
@@ -298,6 +297,7 @@ function computerFire(){
       }
     }
     compDestroyedShips();
+    //Computer win function
     if(compNumberOfHits === 17){
       return compWin();
     }
@@ -325,25 +325,25 @@ function computerFire(){
 // Patrol Boat - 2 boxes/hits
 
 //Positions of my ships on computers board.
-for(let compRow = 0; compRow < compDomGameBoard.length; compRow++){
-  for(let compColumn = 0; compColumn < compDomGameBoard[compRow].length; compColumn++){
-    if(compDomGameBoard[compRow][compColumn] === 1){
+for(let compRow = 0; compRow < compActualGameBoard.length; compRow++){
+  for(let compColumn = 0; compColumn < compActualGameBoard[compRow].length; compColumn++){
+    if(compActualGameBoard[compRow][compColumn] === 1){
       const userCarrierBoxPositionID = 'C' + compRow + compColumn;
       const userCarrierBoxPosition = document.getElementById(userCarrierBoxPositionID);
       userCarrierBoxPosition.style.background = 'black';
-    } else if(compDomGameBoard[compRow][compColumn] === 5){
+    } else if(compActualGameBoard[compRow][compColumn] === 5){
       const userCarrierBoxPositionID = 'C' + compRow + compColumn;
       const userCarrierBoxPosition = document.getElementById(userCarrierBoxPositionID);
       userCarrierBoxPosition.style.background = 'black';
-    } else if(compDomGameBoard[compRow][compColumn] === 6){
+    } else if(compActualGameBoard[compRow][compColumn] === 6){
       const userCarrierBoxPositionID = 'C' + compRow + compColumn;
       const userCarrierBoxPosition = document.getElementById(userCarrierBoxPositionID);
       userCarrierBoxPosition.style.background = 'black';
-    } else if(compDomGameBoard[compRow][compColumn] === 7){
+    } else if(compActualGameBoard[compRow][compColumn] === 7){
       const userCarrierBoxPositionID = 'C' + compRow + compColumn;
       const userCarrierBoxPosition = document.getElementById(userCarrierBoxPositionID);
       userCarrierBoxPosition.style.background = 'black';
-    } else if(compDomGameBoard[compRow][compColumn] === 4){
+    } else if(compActualGameBoard[compRow][compColumn] === 4){
       const userCarrierBoxPositionID = 'C' + compRow + compColumn;
       const userCarrierBoxPosition = document.getElementById(userCarrierBoxPositionID);
       userCarrierBoxPosition.style.background = 'black';
@@ -353,4 +353,4 @@ for(let compRow = 0; compRow < compDomGameBoard.length; compRow++){
 // const randomRow = Math.floor(Math.random()*10);
 // const randomColumn = Math.floor(Math.random()*10);
 // computerFire();
-// console.log(compDomGameBoard[randomRow][randomColumn])
+// console.log(compActualGameBoard[randomRow][randomColumn])
