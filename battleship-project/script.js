@@ -174,8 +174,8 @@ function userFire(){
       }
     }
     //Win!!
-    if(userNumberOfHits === 12){
-      userWin();
+    if(userNumberOfHits === 17){
+      return userWin();
     }
     ingameDisplay.textContent = 'YOU   HAVE   HIT   COMPUTER\'S   SHIP!!';
     userDestroyShip();
@@ -184,7 +184,7 @@ function userFire(){
 
   // WIN FUNCTION
   function userWin(){
-    ingameDisplay.textContent = 'You have sunk all of computers ships, You Win!';
+    return ingameDisplay.textContent = 'You have sunk all of computers ships, You Win!';
   }
 
   //HIT AND MISS CONDITION!!
@@ -258,7 +258,7 @@ function computerFire(){
   }
   console.log(compCurrentDomChoice);
   function compWin(){
-    ingameDisplay.textContent = 'Computer has sunk all your ships, you Loose!!';
+    return ingameDisplay.textContent = 'Computer has sunk all your ships, you Loose!!';
   }
   function compHit(){
     compCurrentGameBox.style.background = 'red';
@@ -299,7 +299,7 @@ function computerFire(){
     }
     compDestroyedShips();
     if(compNumberOfHits === 17){
-      compWin();
+      return compWin();
     }
   }
   //HIT AND MISS CONDITION FOR COMPUTER!!
