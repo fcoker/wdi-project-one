@@ -1,58 +1,62 @@
+/*------>how do i make captains head stationary when display messages come up
+-------->
+ */
+div {
+  box-sizing: border-box;
+}
+
+ h1{
+   font-family: 'Fredericka the Great', cursive;
+   text-align: center;
+   font-size: 9vh;
+ }
 body{
   background-image: url('battleship img/battleship background/map-2153535_1280.jpg');
-  background-image: wrap;
+  background-size: contain;
 }
 .mainContainer{
-  display: inline-block;
   display: flex;
-  width: 1400px;
-  height: 1400px;
-  justify-content: center;
+  justify-content: space-around;
   opacity: 0.8;
-  margin-top: 17vh;
+  margin-top: 60px;
 }
 
-.gameBoard{
-  height: 620px;
-  width: 610px;
+header {
   display: flex;
-  flex-wrap: wrap;
-  border: solid;
-  margin-right: 5vh;
-  background-image: url('battleship img/water-1330252_1280.jpg');
+  justify-content: space-around;
 }
 
-.gameBoard div{
-  border: solid;
-  height: 50px;
-  width: 50px;
-  padding-right: 5px;
-  padding-bottom: 6px;
+.userArea, .computerArea {
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+}
+
+/* .computerArea {
+  flex-grow: 1;
+  display: flex;
+} */
+
+.gameBoard div, .computerGameBoard div{
+  border: 1px solid;
+  width: 10%;
+  /* padding-right: 5px;
+  padding-bottom: 6px; */
   opacity: 0.6;
   /* position: relative; */
+  height: 0;
+  padding-bottom: 10%; /* Make it exactly square */
 }
-.computerGameBoard{
-  height: 620px;
-  width: 610px;
-  border: solid;
+.gameBoard, .computerGameBoard{
+  /* border: solid; */
   display: flex;
   flex-wrap: wrap;
   background-image: url('battleship img/water-1330252_1280.jpg');
-
-}
-.computerGameBoard div{
-  border: solid;
-  height: 50px;
-  width: 50px;
-  padding-right: 5px;
-  padding-bottom: 6px;
-  opacity: 0.6;
-  /* position: relative; */
 }
 
 .ingameDisplay{
   display: flex;
-  margin-left: 95vh;
   background: url('battleship img/battleship new/battle new/steel-2737105_1280.jpg');
   height: 25vh;
   width: 85vh;
@@ -72,17 +76,22 @@ body{
   width: 85%;
   border-radius: 100%;
   opacity: 0.9;
-  z-index: 3;
 }
 .circleFace{
   border-radius: 100%;
-  margin: 3vh;
+  flex-basis: 40%;
+  margin: 13px;
   width: 31vh;
   height: 23vh;
   position: relative;
-
 }
-p{
+
+.displayTextContainer {
+  flex-basis: 60%;
+  margin: 13px;
+}
+
+.ingameDisplay p{
   font-family: 'Orbitron', sans-serif;
   font-size: 5vh;
   text-align: center;
@@ -93,12 +102,63 @@ p{
  -webkit-text-fill-color: transparent;
  font-weight: 1000;
 }
+
+.healthAndInfo {
+  display: flex;
+  margin-top: 30px;
+}
+
+.shipInfo {
+  flex-basis: 60%;
+}
+
 .userHealthBar{
-  background-color: green;
-  width: 200px;
-  height: 228px;
-  position: absolute;
-  top: 1134px;
-  width: 94vh;
   border: solid;
+  background: url('battleship img/battleship new/battle new/steel-2737105_1280.jpg');
+  flex-basis: 40%;
+}
+.shipNumber{
+  border: solid;
+}
+.shipsHealth{
+  border: solid;
+  display: flex;
+  height: 60px;
+}
+.shipKey{
+  border: solid;
+  display: flex;
+  align-items: center;
+  flex-basis: 25%;
+  background-size: cover;
+}
+.shipImages{
+  width: 100%;
+}
+
+footer {
+  height: 90px;
+  background-color: black;
+  color: white;
+  padding: 50px;
+  margin-top: 13px;
+}
+
+.carrier {
+  background-image: url('battleship img/ships/carrier.jpg');
+}
+.battleship {
+  background-image: url('battleship img/ships/battleship.jpg');
+  background-position-y: -27px;
+}
+.destroyer {
+  background-image: url('battleship img/ships/destroyer.jpg');
+}
+.submarine {
+  background-image: url('battleship img/ships/submarine.jpg');
+  background-position-y: -4px;
+}
+.patrol-boat {
+  background-image: url('battleship img/ships/patrol boat.jpg');
+  background-position-y: 63px;
 }

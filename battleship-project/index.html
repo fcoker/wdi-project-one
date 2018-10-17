@@ -4,46 +4,64 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
   <title>My Battleship</title>
 </head>
 <body>
-  <h1>Battle ship</h1>
-  <div class = 'ingameDisplay'>
-    <div class = 'circleFace'><img src='battleship img/juzo_okita_by_akiba165-d6sxsqy.jpg' class='captainHead'/></div>
-    <p class = 'displayText'></p>
-  </div>
-  <div class = 'mainContainer columns'>
-    <div id="gameBoardDiv" class='gameBoard column '>
+  <div class="container">
+    <header>
+      <h1>BATTLE SHIPS</h1>
+      <div class='ingameDisplay'>
+        <div class='circleFace'><img src='battleship img/juzo_okita_by_akiba165-d6sxsqy.jpg' class='captainHead'/></div>
+        <div class="displayTextContainer">
+          <p class='displayText'></p>
+        </div>
+      </div>
+    </header>
+    <div class = 'mainContainer columns'>
+      <div class="userArea">
+        <div id="gameBoardDiv" class='gameBoard column '></div>
+      </div>
+      <div class="computerArea">
+        <div id='computerGameBoardDiv' class ='computerGameBoard column '></div>
+      </div>
     </div>
-    <div id = 'computerGameBoardDiv' class ='computerGameBoard column '>
+    <div class="healthAndInfo">
+      <div class="shipInfo">
+        Ship info
+      </div>
+      <div class ='userHealthBar'>
+        <div class ='shipsHealth'>
+          <div class ='shipKey carrier'></div>
+          <div>health bar </div>
+        </div>
+
+        <div class='shipsHealth'>
+          <div class='shipKey battleship'></div>
+          <div>health bar</div>
+        </div>
+
+        <div class='shipsHealth'>
+          <div class='shipKey destroyer'></div>
+          <div>health bar</div>
+        </div>
+
+        <div class='shipsHealth'>
+          <div class='shipKey submarine'></div>
+          <div>health bar</div>
+        </div>
+
+        <div class='shipsHealth'>
+          <div class='shipKey patrol-boat'></div>
+          <div>health bar</div>
+        </div>
+
+      </div>
     </div>
-    <div class ='userHealthBar'>
-      <div class ='aircraftCarrier'>
-        <div class ='shipKey'>carrier</div>
-        <div>health bar </div>
-      </div>
-
-      <div class = 'battleShip'>
-        <div>battleShip</div>
-        <div>health bar</div>
-      </div>
-
-      <div class = 'Destroyer'>
-        <div>destroyer</div>
-        <div>health bar</div>
-      </div>
-
-      <div class = 'submarine'>
-        <div>submarine</div>
-        <div>health bar</div>
-      </div>
-
-      <div class = 'PatrolBoat'>
-        <div>patrolBoat</div>
-        <div>health bar</div>
-      </div>
-
-    </div>
+    <footer>
+      <p>Battleships by Femi</p>
+      <p>Here's how to play</p>
+    </footer>
   </div>
 
   <script src="script.js" charset="utf-8"></script>

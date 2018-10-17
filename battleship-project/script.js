@@ -191,21 +191,29 @@ let compBattleShip = [];
 let compSubmarine = [];
 let compDestroyer = [];
 
+// function compRandomnChoice(){
+//   const randomnRow = Math.floor(Math.random()*10);
+//   const randomnColumn = Math.floor(Math.random()*10);
+//   const compCurrentDomChoice = compDomGameBoard[randomnRow][randomnColumn];
+//   const compCurrentGameBoxID = 'C' + randomnRow + randomnColumn;
+//   const compCurrentGameBox = document.getElementById(compCurrentGameBoxID);
+//   return compCurrentDomChoice;
+// }
 //computer fire function!!
 function computerFire(){
   const randomnRow = Math.floor(Math.random()*10);
   const randomnColumn = Math.floor(Math.random()*10);
-  // (compDomGameBoard)keeps coming up as undefined even though it is defined globally!!
-  // let currentDomCompChoice = compDomGameBoard[randomnRow][randomnColumn];
   const compCurrentGameBoxID = 'C' + randomnRow + randomnColumn;
   const compCurrentGameBox = document.getElementById(compCurrentGameBoxID);
   // console.log(compDomGameBoard[randomnRow][randomnColumn]);
+  let compCurrentDomChoice = compDomGameBoard[randomnRow][randomnColumn];
   function compMiss(){
     compCurrentGameBox.style.background = 'grey';
     ingameDisplay.textContent = 'Computer\'s torpedo missed you!!';
     playerTurn = true;
-    return compDomGameBoard[randomnRow][randomnColumn] = 3;
+    return compCurrentDomChoice = 3;
   }
+
   function compWin(){
     ingameDisplay.textContent = 'Computer has sunk all your ships, you Loose!!';
   }
@@ -213,9 +221,9 @@ function computerFire(){
     compCurrentGameBox.style.background = 'red';
     ingameDisplay.textContent = 'Computer has hit your ship!!';
     compNumberOfHits ++;
+    const userTypeOfShipHit = compCurrentDomChoice * 2;
     //Determine type of ship hit and push the portion of the ship hit to their respective ship array.
     function compDestroyedShips(){
-      const userTypeOfShipHit = compDomGameBoard[randomnRow][randomnColumn] * 2;
       if(userTypeOfShipHit === 2){
         compCarrier.push(userTypeOfShipHit);
       } else if (userTypeOfShipHit === 8) {
@@ -252,11 +260,11 @@ function computerFire(){
   }
   //HIT AND MISS CONDITION FOR COMPUTER!!
   //If miss, Miss function is invoked
-  if(!compDomGameBoard[randomnRow][randomnColumn]){
+  if(!compCurrentDomChoice){
     compMiss();
     // Hit!!
     // If hit, hit function is invoked
-  } else if(compDomGameBoard[randomnRow][randomnColumn]){
+  } else if(compCurrentDomChoice ){
     compHit();
   }
   if (!playerTurn){
