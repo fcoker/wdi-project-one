@@ -8,6 +8,7 @@
 //----->sound for FIRE functions
 //----->add difficulty levels using probability of computer hits
 //----->When game is finished restart with button.
+//------------------------------------------------------------------------------
 
 //User gameboard containing position of all hits, misses and location of computers ships.
 // NUMBER CODE AND MEANING!

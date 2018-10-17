@@ -124,8 +124,10 @@ header {
 .userHealthBar{
   background: url('https://i.imgur.com/bs1ejbG.jpg');
   flex-basis: 40%;
-  margin-right: 75px;
   border-radius: 18px;
+  margin-right: 10px;
+  max-width: 429px;
+  margin-left: 10px;
 }
 .shipNumber{
   border: solid;
@@ -201,4 +203,15 @@ h3{
 .instructionParagraph{
   line-height: 24pt;
   margin-top: -29px;
+}
+.carrierHealth{
+  display: flex;
+}
+.healthBarBlocks div{
+  background: -webkit-linear-gradient(#F0F0F0, black);
+  height: 48px;
+  width: 31px;
+  margin-top: 5px;
+  margin-left: 7px;
+  border-radius: 30px;
 }
