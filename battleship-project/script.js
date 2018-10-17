@@ -1,13 +1,13 @@
 //PREDICAMENTS
-//MVP!!!
+//----->Add health progress bars to indivdual ships that go down relative to hit counts
 //----->How can i get the computer to randomnly position his/her ships on the board at the start of the game?
-//----->When game is won how do i end game and restart.
-// FINISHED GAME
 //----->Give computer if condition that once a hit is made, its next hit is a 1/4,
 //      if hit again 1/1 till ship destroyed.
 //----->allow computer randmonly place all ships on board at the start of the game.
 //----->animations for hit and miss functions that explode on ship or drop into the water
 //----->sound for FIRE functions
+//----->add difficulty levels using probability of computer hits
+//----->When game is finished restart with button.
 
 //User gameboard containing position of all hits, misses and location of computers ships.
 // NUMBER CODE AND MEANING!
@@ -204,7 +204,7 @@ function userFire(){
   currentGameBox.removeEventListener('click', userFire);
   if (!playerTurn){
 
-    setTimeout(computerFire, 1000);
+    setTimeout(computerFire, 800);
   }
 }
 // if(!playerTurn)
@@ -314,7 +314,7 @@ function computerFire(){
   }
   if (!playerTurn){
 
-    setTimeout(computerFire, 1000);
+    setTimeout(computerFire, 800);
   }
 }
 //Total number of hits per player to win is 17. So if any player gets hit 17 times the game is over.

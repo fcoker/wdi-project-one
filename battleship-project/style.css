@@ -11,7 +11,7 @@ div {
    font-size: 9vh;
  }
 body{
-  background-image: url('battleship img/battleship background/map-2153535_1280.jpg');
+  background-image: url('https://i.imgur.com/r1Qy0vs.jpg');
   background-size: contain;
 }
 .mainContainer{
@@ -61,12 +61,12 @@ header {
   /* border: solid; */
   display: flex;
   flex-wrap: wrap;
-  background-image: url('battleship img/water-1330252_1280.jpg');
+  background-image: url('https://i.imgur.com/lCtVJ47.jpg');
 }
 
 .ingameDisplay{
   display: flex;
-  background: url('battleship img/battleship new/battle new/steel-2737105_1280.jpg');
+  background: url('https://i.imgur.com/bs1ejbG.jpg');
   height: 25vh;
   width: 85vh;
   padding-bottom: 3vh;
@@ -122,25 +122,26 @@ header {
 }
 
 .userHealthBar{
-  border: solid;
-  background: url('battleship img/battleship new/battle new/steel-2737105_1280.jpg');
+  background: url('https://i.imgur.com/bs1ejbG.jpg');
   flex-basis: 40%;
   margin-right: 75px;
+  border-radius: 18px;
 }
 .shipNumber{
   border: solid;
 }
 .shipsHealth{
-  border: solid;
   display: flex;
   height: 60px;
 }
 .shipKey{
-  border: solid;
+  border-bottom: solid;
+  border-top-left-radius: 18px;
   display: flex;
   align-items: center;
   flex-basis: 25%;
   background-size: cover;
+  border-bottom-left-radius: 18px;
 }
 .shipImages{
   width: 100%;
@@ -151,7 +152,7 @@ footer {
   color: white;
   padding: 50px;
   margin-top: 13px;
-  background-image: url('battleship img/battleship new/battle new/steel-2737105_1280.jpg');
+  background-image: url('https://i.imgur.com/bs1ejbG.jpg');
   border-radius: 13px;
   display: flex;
   flex-direction: column;
@@ -179,21 +180,21 @@ h3{
 }
 
 .carrier {
-  background-image: url('battleship img/ships/carrier.jpg');
+  background-image: url('https://i.imgur.com/XAR1dGm.jpg');
 }
 .battleship {
-  background-image: url('battleship img/ships/battleship.jpg');
+  background-image: url('https://i.imgur.com/Yn8KMmB.jpg');
   background-position-y: -27px;
 }
 .destroyer {
-  background-image: url('battleship img/ships/destroyer.jpg');
+  background-image: url('https://i.imgur.com/Rh2hVPe.jpg');
 }
 .submarine {
-  background-image: url('battleship img/ships/submarine.jpg');
+  background-image: url('https://i.imgur.com/iH9abu9.jpg');
   background-position-y: -4px;
 }
 .patrol-boat {
-  background-image: url('battleship img/ships/patrol boat.jpg');
+  background-image: url('https://i.imgur.com/8rj1Cnc.jpg');
   background-position-y: 63px;
 }
 
