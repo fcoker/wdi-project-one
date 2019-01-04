@@ -109,11 +109,11 @@ function computerFire(){
 
 ## Screenshots
 **User Hit**
-![mvp1](battleship img/userHit.png)
+![userhit](battleship-img/userHit.png)
 **Destroyed All Ships**
-![mvp1](battleship img/sunkAllShips.png)
+![shipsDestroyed](battleship-img/sunkAllShips.png)
 **Computer Miss**
-![mvp1](battleship img/computerMiss.png)
+![computerMiss](battleship-img/computerMiss.png)
 
 
 
