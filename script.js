@@ -351,7 +351,3 @@ for(let compRow = 0; compRow < compActualGameBoard.length; compRow++){
     }
   }
 }
-// const randomRow = Math.floor(Math.random()*10);
-// const randomColumn = Math.floor(Math.random()*10);
-// computerFire();
-// console.log(compActualGameBoard[randomRow][randomColumn])
