@@ -42,7 +42,7 @@ My second predicament in the planning stage was deciding how I was going to repr
 
 
 ### Featured Piece of Code no. 1
-My first piece of code which i'm quite proud of is determining whether a ship has been hit, what type of ship has been hit and also when a ship has been totally destroyed. I was able to determine when a ship and what type of ship has been hit using specific numbers as keys on my grid which is shown below. each number represent either a ship, a hit, a miss and type of ship hit.
+My first piece of code which I'm quite proud of is determining whether a ship has been hit, what type of ship has been hit and also when a ship has been totally destroyed. I was able to determine when a ship and what type of ship has been hit using specific numbers as keys on my grid which is shown below. each number represent either a ship, a hit, a miss and type of ship hit.
 
 Secondly to tell when a ship had been destroyed I used conditional statements to check the element lengths of each ship array, when the array length matches the total ship length then the ship has been destroyed.
 
@@ -74,7 +74,7 @@ function userDestroyShip(){
 ```
 
 ### Featured Piece of Code no. 2
-The second piece of code is the computer fire function. I found this relatively tricky because I realised that the computer was unable to determine whether or not a square was already occupied by a hit ship. This bug also led to the computer hitting ships on the user's game boards that weren't actually there so I had to create two functions to determine first of all whether a grid square has already been hit or missed using conditional statements the computer only successfully fires if the random square it picks is either empty or hasn't been hit before.
+The second piece of code is the computer fire function. I found this relatively tricky because I realised that the computer was unable to determine whether or not a square was already occupied by a ship thats already been hit. This bug also led to the computer hitting ships on the user's game boards that weren't actually there so I had to create two functions to determine first of all whether a grid square has already been hit or missed using conditional statements. The computer only successfully fires if the random square it picks is either empty or hasn't been hit before.
 
 
 ``` JavaScript
